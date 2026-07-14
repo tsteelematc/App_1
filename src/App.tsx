@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { AuthPage } from '@/components/AuthPage';
@@ -31,13 +31,9 @@ function AuthGuard({
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
-
   return (
     <BrowserRouter>
-      <div className="min-h-screen bg-base-100 text-base-content">
+      <div data-theme={isDarkMode ? 'dark' : 'light'} className="min-h-screen bg-base-100 text-base-content">
         <nav className="navbar border-b border-base-300 bg-base-200 px-4 md:px-6">
           <div className="flex-1">
             <span className="text-lg font-semibold">App 1</span>
@@ -70,26 +66,28 @@ function App() {
           </div>
         </nav>
 
-        {/* ensure all new routes require auth */}
-        <Routes>
-          <Route
-            path="/auth"
-            element={
-              <AuthGuard requireAuth={false}>
-                <AuthPage />
-              </AuthGuard>
-            }
-          />
-          <Route
-            path="/"
-            element={
-              <AuthGuard requireAuth={true}>
-                <HomePage />
-              </AuthGuard>
-            }
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        <main className="bg-base-200">
+          {/* ensure all new routes require auth */}
+          <Routes>
+            <Route
+              path="/auth"
+              element={
+                <AuthGuard requireAuth={false}>
+                  <AuthPage />
+                </AuthGuard>
+              }
+            />
+            <Route
+              path="/"
+              element={
+                <AuthGuard requireAuth={true}>
+                  <HomePage />
+                </AuthGuard>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </main>
       </div>
     </BrowserRouter>
   );
