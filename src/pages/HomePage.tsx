@@ -1,6 +1,8 @@
 import emptyStates from '@/assets/empty-states.svg';
 import { useAuth } from '@/hooks/AuthContext';
 
+const FirstComponent = () => <h1>Tom was here ! ! !</h1>;
+
 export function HomePage() {
   const { signOut } = useAuth();
 
@@ -11,6 +13,7 @@ export function HomePage() {
         Hello, World123.
       </h1>
       <p className="mt-4 text-lg text-gray-400 font-light">I am a Blank App.</p>
+      <FirstComponent />
       <button
         onClick={() => void signOut()}
         className="absolute top-5 right-8 text-gray-300 hover:text-gray-500 transition-colors text-xs"
