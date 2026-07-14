@@ -14,6 +14,9 @@ export function HomePage() {
       </h1>
       <p className="mt-4 text-lg text-gray-400 font-light">I am a Blank App.</p>
       <FirstComponent />
+      <button className="btn w-64 rounded-full mt-3">
+        DaisyUI Button
+      </button>
       <button
         onClick={() => void signOut()}
         className="absolute top-5 right-8 text-gray-300 hover:text-gray-500 transition-colors text-xs"
